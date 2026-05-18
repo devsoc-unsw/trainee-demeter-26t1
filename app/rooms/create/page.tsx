@@ -1,9 +1,17 @@
-import React from 'react'
+import CreateRoomForm from "@/components/rooms/CreateRoomForm";
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+export default async function CreateRoomPage() {
+  const session = await getSession();
+
+  // Redirect if user is not logged in at the moment
+  //I think error at the moment with login so comment it out.
+//   if (!session) {
+//     redirect("/auth/login");
+//   }
+
+    const user = session?.userData;
+
+   return <CreateRoomForm user={user} />;
 }
-
-export default page
